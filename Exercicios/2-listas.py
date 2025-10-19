@@ -12,89 +12,103 @@ Observações:
 - Mantida a lógica original do arquivo; foram adicionados comentários e docstrings para documentação.
 """
 
-# Gera um range de 1 a 10 (valor final não incluído em range, por isso 11)
-numeros = range(1, 11)
-print('\n--------------------------')
-print('Numeros de 1 á 10: ')
-# Usa enumerate para obter o índice e decidir o separador (barra vertical) até o último elemento
-for idx, num in enumerate(numeros, start=1):
-    print(num, '|' if idx < len(numeros) else '', end=' ')
-
-
-print('\n--------------------------')
-# Lista com quatro nomes
-quatro_nomes = ['Kevin', 'João', 'Maria', 'Zezinho']
-print('Quatro nomes: ')
-# Imprime cada nome separado por vírgula, sem adicionar vírgula após o último elemento
-for idx, nome in enumerate(quatro_nomes, start=1):
-    print(nome, ',' if idx < len(quatro_nomes) else '', end=' ')
-
-
-print('\n--------------------------')
-# Lista com alguns anos
-lista_datas_anuais = [2000, 2010, 2020, 2025]
-print('Lista com alguns anos: ')
-# Imprime os anos separados por '->' até o último elemento
-for idx, ano in enumerate(lista_datas_anuais, start=1):
-    print(ano, '->' if idx < len(lista_datas_anuais) else '', end=' ')
-
-
-print('\n--------------------------')
-print('Calculando soma de numeros impares de 1 á 10 ... ')
-# Gera uma lista com os números ímpares entre 1 e 10 usando list comprehension
-lista_impares = [impar for impar in range(1, 11) if impar % 2 != 0]
-# Cria uma expressão textual do tipo "1 + 3 + 5 + ..."
-expressao = ' + '.join(map(str, lista_impares))
-# Imprime a expressão e o resultado da soma
-print(f'{ expressao } = { sum(lista_impares) }')
-
-
-print('\n--------------------------')
-print('Imprimindo números de 1 á 10 em ordem decresente ... ')
-# Gera lista em ordem decrescente de 10 até 1
-numeros_cresente = [n for n in range(10, 0, -1)]
-# Junta os valores usando ' > ' como separador
-print(' > '.join(map(str, numeros_cresente)))
-
-
-print('\n--------------------------')
-print('Fazendo soma de uma lista com 15 números aleatórios de 1 a 100.')
 import random
-# Gera uma lista de números aleatórios entre 1 e 100. Note: o código original usa 16 elementos.
-numeros_aleatorios = [random.randint(1, 100) for _ in range(16)]
-# Ordena a lista antes de imprimir
-numeros_aleatorios.sort()
-# Imprime todos os números separados por ' + ' e a soma total
-print(' + '.join(map(str, numeros_aleatorios)), ' = ', sum(numeros_aleatorios))
+import os
+os.system('cls')
 
-print('\n--------------------------')
-print('Calculando a média dos valores de uma lista com 10 números aleatóros de 1 a 1000.')
-# Gera 10 números aleatórios entre 1 e 1000
-num_aleatorios = [random.randint(1, 1000) for _ in range(10) ]
-# Imprime a lista no formato {a,b,c,...}
-print('{', ','.join(map(str, num_aleatorios)), '}')
-# Calcula e imprime a média com duas casas decimais
-print('A média dos números acima é: {:.2f}'.format(sum(num_aleatorios) / len(num_aleatorios)))
+def imprimir_numeros(init=1, end=10):
+    """Imprime números de 1 a 10 com separador."""
+    numeros = range(init, end+1)
+    print('\nNumeros de 1 á 10: ')
+    for idx, num in enumerate(numeros, start=1):
+        print(num, '|' if idx < len(numeros) else '', end=' ')
+    print()
 
+def imprimir_quatro_nomes():
+    """Imprime uma lista de quatro nomes com separador."""
+    quatro_nomes = ['Kevin', 'João', 'Maria', 'Zezinho']
+    print('\nQuatro nomes: ')
+    for idx, nome in enumerate(quatro_nomes, start=1):
+        print(nome, ',' if idx < len(quatro_nomes) else '', end=' ')
+    print()
 
+def imprimir_anos():
+    """Imprime uma lista de anos com separador."""
+    lista_datas_anuais = [2000, 2010, 2020, 2025]
+    print('\nLista com alguns anos: ')
+    for idx, ano in enumerate(lista_datas_anuais, start=1):
+        print(ano, '->' if idx < len(lista_datas_anuais) else '', end=' ')
+    print()
 
-print('\n--------------------------')
-print('Pegando um numero com o usuário e fazendo a tabuada do 1 ao 10 do numero ... ')
-# Variável que receberá o número informado pelo usuário para a tabuada
-tabudada = None  # nota: nome da variável segue o original (possível typo: "tabudada" em vez de "tabuada")
-# Loop que solicita a entrada do usuário até receber um inteiro válido
-while True:
-    try:
-        tabudada = int(input('Informe um número para imprimir a tabuada: '))
-        break
-    except (ValueError, KeyboardInterrupt, EOFError):
-        # Em caso de entrada inválida, aguarda que o usuário pressione Enter e tenta novamente
-        input('Número inválido! Pressione <enter> para continuar.')
-        continue
-    except Exception as e:
-        # Captura qualquer outro erro inesperado e informa ao usuário
-        print('Ocorreu um erro inesperado!')
+def calcular_soma_impares():
+    """Calcula e exibe a soma dos números ímpares de 1 a 10."""
+    lista_impares = [impar for impar in range(1, 11) if impar % 2 != 0]
+    expressao = ' + '.join(map(str, lista_impares))
+    print(f'\n{expressao} = {sum(lista_impares)}')
 
-# Imprime a tabuada de 1 a 10 usando enumerate apenas para contar (poderia usar range também)
-for i, _ in enumerate(range(10), start=1):
-    print('{} x {} = {}'.format(tabudada, i, tabudada * i))
+def imprimir_numeros_decrescente():
+    """Imprime números de 10 a 1 em ordem decrescente."""
+    numeros_cresente = [n for n in range(10, 0, -1)]
+    print('\n' + ' > '.join(map(str, numeros_cresente)))
+
+def somar_numeros_aleatorios():
+    """Soma 16 números aleatórios entre 1 e 100."""
+    numeros_aleatorios = [random.randint(1, 100) for _ in range(16)]
+    numeros_aleatorios.sort()
+    print(f'\n{" + ".join(map(str, numeros_aleatorios))} = {sum(numeros_aleatorios)}')
+
+def calcular_media_aleatorios():
+    """Calcula a média de 10 números aleatórios entre 1 e 1000."""
+    num_aleatorios = [random.randint(1, 1000) for _ in range(10)]
+    print('\n{', ','.join(map(str, num_aleatorios)), '}')
+    print(f'A média dos números acima é: {sum(num_aleatorios) / len(num_aleatorios):.2f}')
+
+def fazer_tabuada():
+    """Gera a tabuada de um número informado pelo usuário."""
+    while True:
+        try:
+            tabuada = int(input('\nInforme um número para imprimir a tabuada: '))
+            print()
+            for i in range(1, 11):
+                print(f'{tabuada} x {i} = {tabuada * i}')
+            break
+        except (ValueError, KeyboardInterrupt, EOFError):
+            input('Número inválido! Pressione <enter> para continuar.')
+        except Exception:
+            print('Ocorreu um erro inesperado!')
+            break
+
+def menu():
+    """Exibe o menu principal e gerencia as escolhas do usuário."""
+    opcoes = {
+        1: ('Imprimir números de 1 a 10', imprimir_numeros),
+        2: ('Imprimir quatro nomes', imprimir_quatro_nomes),
+        3: ('Imprimir anos', imprimir_anos),
+        4: ('Calcular soma dos ímpares', calcular_soma_impares),
+        5: ('Imprimir números decrescentes', imprimir_numeros_decrescente),
+        6: ('Somar números aleatórios', somar_numeros_aleatorios),
+        7: ('Calcular média de aleatórios', calcular_media_aleatorios),
+        8: ('Fazer tabuada', fazer_tabuada),
+        0: ('Sair', None)
+    }
+
+    while True:
+        print('\n=== Menu de Operações ===')
+        for key, (descricao, _) in opcoes.items():
+            print(f'{key}. {descricao}')
+
+        try:
+            escolha = int(input('\nEscolha uma opção: '))
+            if escolha == 0:
+                print('Programa encerrado!')
+                break
+            elif escolha in opcoes:
+                opcoes[escolha][1]()
+            else:
+                print('Opção inválida!')
+        except ValueError:
+            print('Por favor, digite um número válido!')
+        input('\nPressione Enter para continuar...')
+
+if __name__ == '__main__':
+    menu()
